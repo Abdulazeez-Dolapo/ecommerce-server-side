@@ -2,7 +2,7 @@ const express = require("express")
 const router = express.Router()
 const Product = require("../models/Product")
 
-router.get("/get-products", (req, res) => {
+router.get("/products", (req, res) => {
 	Product.findAll()
 		.then(products => {
 			res.send({ products })
@@ -13,7 +13,7 @@ router.get("/get-products", (req, res) => {
 		})
 })
 
-router.get("/get-product/:id", (req, res) => {
+router.get("/product/:id", (req, res) => {
 	Product.findOne({
 		where: {
 			product_id: req.params.id,
@@ -36,7 +36,7 @@ router.get("/get-product/:id", (req, res) => {
 		})
 })
 
-router.post("/create-product", (req, res) => {
+router.post("/create", (req, res) => {
 	Product.create(req.body)
 		.then(product => {
 			res.send({
@@ -50,7 +50,7 @@ router.post("/create-product", (req, res) => {
 		})
 })
 
-router.delete("/delete-product/:id", (req, res) => {
+router.delete("/delete/:id", (req, res) => {
 	Product.destroy({
 		where: {
 			product_id: req.params.id,
@@ -68,7 +68,7 @@ router.delete("/delete-product/:id", (req, res) => {
 		})
 })
 
-router.post("/update-event/:id", (req, res) => {
+router.post("/update/:id", (req, res) => {
 	Product.update(
 		{
 			name: req.body.name,
